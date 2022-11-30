@@ -7,7 +7,7 @@ web-framework : django
 Have to do :\
 [o] Insert Card  => click Insert card \
 [o] Select Account + PIN number  => Check Card number and PIN number (valid or not)\
-[o] Select transaction(Balance/Deposit/Withdraw)
+[o] Select transaction(Balance/Deposit/Withdraw) \
 [o] Balance Inquiry, Deposit view, Withdraw view
 
 
