@@ -5,9 +5,10 @@ virtualenv : poetry\
 web-framework : django
 
 Have to do :\
-[o] Insert Card  => Instead of Insert card , Check Card Number\
-[o] Select Account + PIN number  => Check Account number and PIN number (valid or not)\
-[o] See Balance/Deposit/Withdraw 
+[o] Insert Card  => click Insert card \
+[o] Select Account + PIN number  => Check Card number and PIN number (valid or not)\
+[o] Select transaction(Balance/Deposit/Withdraw)
+[o] Balance Inquiry, Deposit view, Withdraw view
 
 
 db_model : AccountInfo(계좌정보), CardInfo(카드정보)\
