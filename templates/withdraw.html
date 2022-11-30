@@ -1,0 +1,18 @@
+{% include 'base.html' %}
+{% block contents %}
+<h1> withdraw </h1>
+{% if balance %}
+    <h1>After withdraw, your balance is {{balance}}</h1>
+    <a href="{% url 'account:home' %}"> Remove the card </a>
+    <br>
+    <a href = "{% url 'account:deposit' card.pk %}"> Deposit </a>
+    <br>
+    <a href = "{% url 'account:withdraw' card.pk%}"> Re-withdraw </a>
+{% else %}
+    <form method = 'POST'> 
+        {% csrf_token %}
+            {{form.as_p}}
+        <button  type = 'submit'> Withdraw </button> 
+    </form>
+{% endif %}
+{% endblock contents %}

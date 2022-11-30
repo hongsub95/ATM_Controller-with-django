@@ -18,5 +18,5 @@ from django.urls import path,include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',include('Accounts.urls',namespace='account'))
+    path('bear-bank/',include('Accounts.urls',namespace='account'))
 ]

@@ -1,0 +1,9 @@
+{% include 'base.html' %}
+<h1> balance </h1>
+your balance is {{card.account_number.balance}}
+<br>
+<a href="{% url 'account:home' %}"> Remove the card </a>
+<br>
+<a href = "{% url 'account:deposit' pk=card.pk %}"> Deposit </a>
+<br>
+<a href = "{% url 'account:withdraw' pk=card.pk %}"> Withdraw </a>

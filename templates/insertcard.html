@@ -1,0 +1,15 @@
+{% extends 'base.html' %} 
+{% block contents %}
+    <h1> Insert Your card</h1>
+    <form action ="{% url 'account:InsertCard' %}" method = 'POST'> 
+        {% csrf_token %}
+        {{form}}
+        <button  type = 'submit'> Insert </button> 
+    </form>
+    {% if msg %}
+        {{msg}}
+    {% endif %}
+    <div> 
+        <a href = "{% url 'account:home' %}" class = 'btn btn-primary mt-5'> Back </a> 
+    </div> 
+{% endblock contents %}

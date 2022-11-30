@@ -1,4 +1,5 @@
 from django.db import models
+
 from django.core.validators import RegexValidator
 
 
@@ -6,7 +7,8 @@ class AccountInfo(models.Model):
     account_number = models.CharField(
         primary_key=True,
         max_length = 10,
-        unique = True
+        unique = True,
+        verbose_name="계좌번호"
     )
     balance = models.BigIntegerField(verbose_name="잔액")
 
