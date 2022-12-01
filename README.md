@@ -55,8 +55,6 @@ If you want initial data, command "python manage.py loaddata initial_data" (It r
 ![image](https://user-images.githubusercontent.com/75579601/205058316-bf4cb481-1de2-4832-882b-4c43107132be.png)
 ![image](https://user-images.githubusercontent.com/75579601/205032813-f2488c97-48e2-423d-8fa1-370d09172584.png)
 
-<h2>If you click "Remove the card", you get homepage</h2>
-
 
 
 
