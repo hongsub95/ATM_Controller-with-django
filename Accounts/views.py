@@ -1,4 +1,5 @@
 from django.shortcuts import render,redirect,reverse
+from django.http import HttpResponseRedirect
 from django.views.generic import DetailView
 from . import models as card_models
 from . import forms as card_forms
@@ -19,7 +20,8 @@ def InsertCardView(request):
                 form = card_forms.InsertCardForm()
                 return render(request, 'insertcard.html', {'form': form, 'msg': 'Pin does not match'})
             else: 
-                return render(request,'transaction.html',{'form':form,'card':card,"pk":card.pk})
+                pk = card.pk
+                return redirect(f"http://127.0.0.1:8000/bear-bank/{pk}/transaction/")
         else: 
             return render(request, 'insertcard.html', {'form': form, 'msg': 'Form not valid'})
     else:
@@ -34,13 +36,12 @@ def TransactionView(request,pk):
     card = card_models.CardInfo.objects.get(pk=pk)
     if request.GET:
         transaction = request.GET['category']
-        print(transaction)
         if transaction == 'balance':
-            return render(request,'balance.html',{'form':form,'card':card,"pk":card.pk})
+            return redirect(f"http://127.0.0.1:8000/bear-bank/{pk}/balance/")
         elif transaction == 'deposit':
-            return render(request,'deposit.html',{'form':form,'card':card,"pk":card.pk})
+            return redirect(f"http://127.0.0.1:8000/bear-bank/{pk}/deposit/")
         elif transaction == 'withdraw':
-            return render(request,'withdraw.html',{'form':form,'card':card,"pk":card.pk})
+            return redirect(f"http://127.0.0.1:8000/bear-bank/{pk}/withdraw/")
     else:
         return render(request,'transaction.html',{'form':form})
 
