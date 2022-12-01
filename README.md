@@ -19,8 +19,8 @@ Card_chema : Account_id, name(사용자이름), card_number(카드번호), Pin(�
 
 1. install poetry\
 (if your os is Linux,mac,WSL)\
-curl -sSL https://install.python-poetry.org | python3 - 
-1-1. poetry init
+curl -sSL https://install.python-poetry.org | python3 - \
+command "poetry init" (enter,enter,enter,enter,"MIT",enter,no,no,yes)
 2. install django\
 poetry add django
 3. python manage.py makemigrations
