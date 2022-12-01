@@ -50,8 +50,9 @@ If you want initial data, command "python manage.py loaddata initial_data" (It r
 ![image](https://user-images.githubusercontent.com/75579601/205058833-a8f305e1-be7b-422b-b96f-653e0c139c61.png)
 
 # Withdraw
-![image](https://user-images.githubusercontent.com/75579601/205058316-bf4cb481-1de2-4832-882b-4c43107132be.png)
+![image](https://user-images.githubusercontent.com/75579601/205064292-d3a5a52f-3186-4754-b313-9f0bc2111309.png)
 ![image](https://user-images.githubusercontent.com/75579601/205058650-1ec75c8e-4df8-4982-bdb4-37e8dcf8d2db.png)
+![image](https://user-images.githubusercontent.com/75579601/205058316-bf4cb481-1de2-4832-882b-4c43107132be.png)
 ![image](https://user-images.githubusercontent.com/75579601/205032813-f2488c97-48e2-423d-8fa1-370d09172584.png)
 
 <h2>If you click "Remove the card", you get homepage</h2>
