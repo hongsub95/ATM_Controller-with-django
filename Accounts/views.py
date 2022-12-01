@@ -45,8 +45,9 @@ def TransactionView(request,pk):
     else:
         return render(request,'transaction.html',{'form':form})
 
-class BalanceView(DetailView):
-    model = card_models.CardInfo    
+def BalanceView(request,pk):
+    card = card_models.CardInfo.objects.get(pk=pk)
+    return render(request,"balance.html",{"card":card})
 
 def DepositView(request,pk):
     if request.method == "POST":
@@ -74,10 +75,10 @@ def WithdrawView(request,pk):
             amount = form.cleaned_data['amount']
             if amount <= 0:
                 form = card_forms.WithdrawForm()
-                return render(request,"withdraw.html",{"form":form,"msg":"Not a valid amount"})
+                return render(request,"withdraw.html",{"form":form,'card':card,"msg":"Not a valid amount"})
             elif card.account_number.balance < amount:
                 form = card_forms.WithdrawForm()
-                return render(request,"withdraw.html",{'form':form,'msg':"Insufficient Funds."})
+                return render(request,"withdraw.html",{'form':form,'card':card,'msg':"Insufficient Funds."})
             else:
                 card.account_number.balance -=amount
                 card.account_number.save()
@@ -85,7 +86,7 @@ def WithdrawView(request,pk):
                 return render(request,'withdraw.html',{'form':form,'card':card,'balance':current_balance,"success_msg":"Funds Withdrawn Successfully"})
         else:
             form = card_forms.WithdrawForm()
-            return render(request,"withdraw.html",{"form":form,"msg":"Not a valid form"})
+            return render(request,"withdraw.html",{"form":form,'card':card,"msg":"Not a valid form"})
     else:
         form = card_forms.WithdrawForm()
         return render(request,"withdraw.html",{"form":form})

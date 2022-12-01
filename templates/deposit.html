@@ -2,12 +2,21 @@
 {% block contents %}
 <h1> Deposit </h1>
 {% if balance %}
-    <h1>After deposit, your balance is {{balance}}</h1>
+    <h2>Funds deposited successfully</h2>
+    <h2>your balance : {{balance}}</h2>
     <a href="{% url 'account:home' %}"> Remove the card </a>
     <br>
     <a href = "{% url 'account:withdraw' card.pk %}"> Withdraw </a>
     <br>
     <a href = "{% url 'account:deposit' card.pk%}"> Re-deposit </a>
+{% elif msg %}
+    {{msg}}
+    <br>
+    <a href="{% url 'account:home' %}"> Remove the card </a>
+    <br>
+    <a href = "{% url 'account:deposit' card.pk %}"> Re-Deposit </a>
+    <br>
+    <a href = "{% url 'account:withdraw' card.pk%}"> withdraw </a>
 {% else %}
     <form method = 'POST'> 
         {% csrf_token %}

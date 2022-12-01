@@ -8,7 +8,7 @@ urlpatterns = [
     path('card-insert/',views.InsertCardView,name="InsertCard"),
     path('card-remove/',views.RemoveCardView,name='RemoveCard'),
     path('<int:pk>/transaction/',views.TransactionView,name="transaction"),
-    path('<int:pk>/balance/',views.BalanceView.as_view(),name="balance"),
+    path('<int:pk>/balance/',views.BalanceView,name="balance"),
     path('<int:pk>/deposit/',views.DepositView,name='deposit'),
     path('<int:pk>/withdraw/',views.WithdrawView,name='withdraw'),
 ]

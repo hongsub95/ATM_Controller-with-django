@@ -2,7 +2,16 @@
 {% block contents %}
 <h1> withdraw </h1>
 {% if balance %}
-    <h1>After withdraw, your balance is {{balance}}</h1>
+    <h2>Funds Withdrawn Successfully</h2>
+    <h2>your balance : {{balance}}</h2>
+    <a href="{% url 'account:home' %}"> Remove the card </a>
+    <br>
+    <a href = "{% url 'account:deposit' card.pk %}"> Deposit </a>
+    <br>
+    <a href = "{% url 'account:withdraw' card.pk%}"> Re-withdraw </a>
+{% elif msg %}
+    {{msg}}
+    <br>
     <a href="{% url 'account:home' %}"> Remove the card </a>
     <br>
     <a href = "{% url 'account:deposit' card.pk %}"> Deposit </a>
