@@ -46,12 +46,12 @@ If you want initial data, command "python manage.py loaddata initial_data" (It r
 ![5](https://user-images.githubusercontent.com/75579601/205032243-5c4ee60b-80ee-4ea9-b8fb-002f7fb81009.png)
 
 # Deposit
-![image](https://user-images.githubusercontent.com/75579601/205032496-05de17a9-7ddf-415a-980d-0daf44795b8d.png)
-![image](https://user-images.githubusercontent.com/75579601/205032573-a22c1ff0-715a-48cc-80d9-7e6b2febe663.png)
+![image](https://user-images.githubusercontent.com/75579601/205058033-0069c0fa-7246-4c68-90f8-773cb4805d5c.png)
+![image](https://user-images.githubusercontent.com/75579601/205058833-a8f305e1-be7b-422b-b96f-653e0c139c61.png)
 
 # Withdraw
-![image](https://user-images.githubusercontent.com/75579601/205032659-07178825-d032-4d3e-b36e-74d6f880b485.png)
-![image](https://user-images.githubusercontent.com/75579601/205032732-633e1485-14a4-445f-9ad7-fe4fb87a56ca.png)
+![image](https://user-images.githubusercontent.com/75579601/205058316-bf4cb481-1de2-4832-882b-4c43107132be.png)
+![image](https://user-images.githubusercontent.com/75579601/205058650-1ec75c8e-4df8-4982-bdb4-37e8dcf8d2db.png)
 ![image](https://user-images.githubusercontent.com/75579601/205032813-f2488c97-48e2-423d-8fa1-370d09172584.png)
 
 <h2>If you click "Remove the card", you get homepage</h2>
