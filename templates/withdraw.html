@@ -10,7 +10,7 @@
     <br>
     <a href = "{% url 'account:withdraw' card.pk%}"> Re-withdraw </a>
 {% elif msg %}
-    {{msg}}
+    <h2>{{msg}}</h2>
     <br>
     <a href="{% url 'account:home' %}"> Remove the card </a>
     <br>

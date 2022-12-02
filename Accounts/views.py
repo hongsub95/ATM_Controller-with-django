@@ -21,8 +21,8 @@ def InsertCardView(request):
                 return render(request, 'insertcard.html', {'form': form, 'msg': 'Pin does not match'})
             else: 
                 pk = card.pk
-                return redirect(f"http://127.0.0.1:8000/bear-bank/{pk}/transaction/")
-        else: 
+                return redirect(reverse("account:transaction",kwargs={"pk":pk}))
+        else:
             return render(request, 'insertcard.html', {'form': form, 'msg': 'Form not valid'})
     else:
         form = card_forms.InsertCardForm()
@@ -33,15 +33,14 @@ def RemoveCardView(request):
 
 def TransactionView(request,pk):
     form = card_forms.TransactionForm()
-    card = card_models.CardInfo.objects.get(pk=pk)
     if request.GET:
         transaction = request.GET['category']
         if transaction == 'balance':
-            return redirect(f"http://127.0.0.1:8000/bear-bank/{pk}/balance/")
+            return redirect(reverse("account:balance",kwargs={"pk":pk}))
         elif transaction == 'deposit':
-            return redirect(f"http://127.0.0.1:8000/bear-bank/{pk}/deposit/")
+            return redirect(reverse("account:deposit",kwargs={"pk":pk}))
         elif transaction == 'withdraw':
-            return redirect(f"http://127.0.0.1:8000/bear-bank/{pk}/withdraw/")
+            return redirect(reverse("account:withdraw",kwargs={"pk":pk}))
     else:
         return render(request,'transaction.html',{'form':form})
 
