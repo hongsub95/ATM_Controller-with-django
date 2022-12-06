@@ -3,11 +3,13 @@ from django.http import HttpResponseRedirect
 from django.views.generic import DetailView
 from . import models as card_models
 from . import forms as card_forms
-
+from .decorators import user_authenticated
+from transactions import services
 
 def HomeView(request):
     return render(request,'home.html')
 
+@user_authenticated
 def InsertCardView(request):
     if request.method == 'POST': 
         form = card_forms.InsertCardForm(request.POST)
@@ -20,8 +22,7 @@ def InsertCardView(request):
                 form = card_forms.InsertCardForm()
                 return render(request, 'insertcard.html', {'form': form, 'msg': 'Pin does not match'})
             else: 
-                pk = card.pk
-                return redirect(reverse("account:transaction",kwargs={"pk":pk}))
+                request.session['token'] = card.card_number
         else:
             return render(request, 'insertcard.html', {'form': form, 'msg': 'Form not valid'})
     else:
@@ -29,30 +30,29 @@ def InsertCardView(request):
         return render(request, 'insertcard.html', {'form': form})
 
 def RemoveCardView(request):
-    return redirect('account:home')
-
-def TransactionView(request,pk):
-    form = card_forms.TransactionForm()
-    if request.GET:
-        transaction = request.GET['category']
-        if transaction == 'balance':
-            return redirect(reverse("account:balance",kwargs={"pk":pk}))
-        elif transaction == 'deposit':
-            return redirect(reverse("account:deposit",kwargs={"pk":pk}))
-        elif transaction == 'withdraw':
-            return redirect(reverse("account:withdraw",kwargs={"pk":pk}))
-    else:
-        return render(request,'transaction.html',{'form':form})
-
+    try:
+        del request.session['token']
+        return redirect('/hong-bank/')
+    except KeyError:
+        pass
+    
+@user_authenticated
 def BalanceView(request,pk):
-    card = card_models.CardInfo.objects.get(pk=pk)
+    try:
+        card = card_models.CardInfo.objects.get(card_number=request.session['token'])
+    except:
+        return render(request,'deposit.html',{'msg':'User does not exist with that account number'})
     return render(request,"balance.html",{"card":card})
 
-def DepositView(request,pk):
+@user_authenticated
+def DepositView(request):
     if request.method == "POST":
         form = card_forms.DepositForm(request.POST)
-        card = card_models.CardInfo.objects.get(pk=pk)
         if form.is_valid():
+            try:
+                card = card_models.CardInfo.objects.get(card_number=request.session['token'])
+            except:
+                return render(request,'deposit.html',{'msg':'User does not exist with that account number'})
             amount = form.cleaned_data['amount']
             card.account_number.balance += amount
             card.account_number.save()
@@ -64,13 +64,15 @@ def DepositView(request,pk):
         form = card_forms.DepositForm()
         return render(request,'deposit.html',{'form':form})
         
-            
-
+@user_authenticated
 def WithdrawView(request,pk):
     if request.method == "POST":
         form = card_forms.WithdrawForm(request.POST)
-        card = card_models.CardInfo.objects.get(pk=pk)
         if form.is_valid():
+            try:
+                card = card_models.CardInfo.objects.get(card_number=request.session['token'])
+            except:
+                return render(request,'deposit.html',{'msg':'User does not exist with that account number'})
             amount = form.cleaned_data['amount']
             if amount <= 0:
                 form = card_forms.WithdrawForm()
@@ -89,5 +91,24 @@ def WithdrawView(request,pk):
     else:
         form = card_forms.WithdrawForm()
         return render(request,"withdraw.html",{"form":form})
-            
-        
+
+@user_authenticated
+def transaction_history(request):
+    renderData = {
+        'request':request,
+        'path':'hong-bank/transaction-history/',
+        'context':{
+            'message':'',
+            'history':[]
+        }
+    }
+    card = services.getCardByNumber(request.session['token'])
+    if not card:
+        services.getMessageData(renderData['context'],'Issue getting CardNumber')
+        return redirect(reverse('account:InsertCard'))
+    transactions = services.getTransactionCard(card.card_number)
+    if not transactions:
+        services.getMessageData(renderData['context'],'You have no transactions')
+        return services.renderpage(renderData)
+    renderData['context']['history'] = transactions
+    return services.renderpage(renderData)
