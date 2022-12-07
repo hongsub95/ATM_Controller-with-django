@@ -2,8 +2,4 @@
 <h1> Balance Inquiry </h1>
 <h2>your balance : {{card.account_number.balance}}</h2>
 <br>
-<a href="{% url 'account:home' %}"> Remove the card </a>
-<br>
-<a href = "{% url 'account:deposit' pk=card.pk %}"> Deposit </a>
-<br>
-<a href = "{% url 'account:withdraw' pk=card.pk %}"> Withdraw </a>
+

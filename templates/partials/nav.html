@@ -1,0 +1,8 @@
+{% if request.session.token %}
+    <a href = "{% url 'account:RemoveCard' %}"> Revome Card</a>
+    <a href =   "{% url 'account:balance' %}">Balance Inquiry</a>
+    <a href = "{% url 'account:deposit' %}">Deposit</a>
+    <a href = "{% url 'account:withdraw' %}">Withdraw</a>
+{% else %}
+    <a href="{% url 'account:InsertCard' %}">Insert Card</a>
+{% endif %}

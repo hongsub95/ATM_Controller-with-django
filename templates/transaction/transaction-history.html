@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block contents %}
+    <h1> Transaction History </h1>
+    {% if history %}
+    {% if message %}
+    <p> {{message}} </p>
+    {% endif %} 
+    <table >
+        <thead>
+          <tr>
+            <th scope="col">Transaction Type</th>
+            <th scope="col"> Date </th>
+            <th scope="col"> Status </th>
+          </tr>
+        </thead>
+
+        {% for transaction in history %}
+            <tbody>
+                <tr>
+                    <td> {{transaction.transaction_type}}</td>
+                    <td> {{transaction.date}} </td>
+                    <td> {{transaction.status}} </td>
+                </tr>
+            </tbody>
+        {% endfor %}
+        </table>
+    {% endif %}
+{% endblock contents %}
+

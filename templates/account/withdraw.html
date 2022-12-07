@@ -4,19 +4,9 @@
 {% if balance %}
     <h2>Funds Withdrawn Successfully</h2>
     <h2>your balance : {{balance}}</h2>
-    <a href="{% url 'account:home' %}"> Remove the card </a>
-    <br>
-    <a href = "{% url 'account:deposit' card.pk %}"> Deposit </a>
-    <br>
-    <a href = "{% url 'account:withdraw' card.pk%}"> Re-withdraw </a>
 {% elif msg %}
     <h2>{{msg}}</h2>
-    <br>
-    <a href="{% url 'account:home' %}"> Remove the card </a>
-    <br>
-    <a href = "{% url 'account:deposit' card.pk %}"> Deposit </a>
-    <br>
-    <a href = "{% url 'account:withdraw' card.pk%}"> Re-withdraw </a>
+    
 {% else %}
     <form method = 'POST'> 
         {% csrf_token %}
