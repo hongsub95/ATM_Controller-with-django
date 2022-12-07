@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block contents %}
+    <h1> Cash Transfer </h1>
+    <form action = "{% url 'account:transfer' %}" method = 'POST'> 
+        {% csrf_token %} 
+        {{form}}
+        <button  type = 'submit'> Transfer </button> 
+    </form>
+    {% if msg %}
+    <p class = 'mt-5'> {{msg}} </p>
+    {% endif %}
+{% endblock contents %}

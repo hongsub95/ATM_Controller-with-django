@@ -8,10 +8,10 @@ class transaction(models.Model):
         ('complete', 'Complete') #완료
     )
     TRANSACTION_TYPE = (
-        ("balance","balance"),
-        ("withdraw","withdraw"),
-        ("deposit","deposit"),
-        ("transfer","transfer")
+        ("balance","balance"), # 잔액조회
+        ("withdraw","withdraw"), # 인출
+        ("deposit","deposit"), # 입금
+        ("transfer","transfer") # 송금
     )
     transaction_id = models.AutoField(primary_key=True,unique=True)
     transaction_type = models.CharField(max_length=20,choices=TRANSACTION_TYPE,default="balance")

@@ -3,6 +3,7 @@
     <a href =   "{% url 'account:balance' %}">Balance Inquiry</a>
     <a href = "{% url 'account:deposit' %}">Deposit</a>
     <a href = "{% url 'account:withdraw' %}">Withdraw</a>
+    <a href = "{% url 'account:transfer' %}">Transfer</a>
 {% else %}
     <a href="{% url 'account:InsertCard' %}">Insert Card</a>
 {% endif %}

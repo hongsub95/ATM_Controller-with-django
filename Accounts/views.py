@@ -60,7 +60,7 @@ def DepositView(request):
             card.account_number.balance += amount
             card.account_number.save()
             current_balance = card.account_number.balance
-            transaction = transaction_models.transaction(status ='complete',response_code=200,transaction_type='deposit')
+            transaction = transaction_models.transaction(status ='complete',response_code='200',transaction_type='deposit')
             transaction.card_number = card
             transaction.save()
             return render(request,"account/deposit.html",{'balance':current_balance,'card':card})
@@ -90,7 +90,7 @@ def WithdrawView(request):
                 card.account_number.balance -=amount
                 card.account_number.save()
                 current_balance = card.account_number.balance 
-                transaction = transaction_models.transaction(status ='complete',response_code=200,transaction_type='withdraw')
+                transaction = transaction_models.transaction(status ='complete',response_code='200',transaction_type='withdraw')
                 transaction.card_number = card
                 transaction.save()
                 return render(request,'account/withdraw.html',{'form':form,'card':card,'balance':current_balance,"success_msg":"Funds Withdrawn Successfully"})
@@ -101,6 +101,53 @@ def WithdrawView(request):
         form = card_forms.WithdrawForm()
         return render(request,"account/withdraw.html",{"form":form})
 
+@user_authenticated
+def TransferView(request):
+    if request.method == "POST":
+        form = card_forms.TransferForm(request.POST)
+        if form.is_valid():
+            accNum = form.cleaned_data['account_number']
+            amount = form.cleaned_data['amount']
+
+            if amount < 0:
+                form = card_forms.TransferForm()
+                return render(request,'account/transfer.html',{'form':form,'msg': 'Not a valid transfer amount'})
+            try:
+                rec_accNum = card_models.AccountInfo.objects.get(account_number=accNum)
+            except:
+                form = card_forms.TransferForm()
+                return render(request,'account/transfer.html',{'form':form,'msg':'User does not exist with that account number.'})
+            card = card_models.CardInfo.objects.get(card_number=request.session['token'])
+            if card.account_number.balance < amount:
+                form = card_forms.TransferForm()
+                return render(request, 'user/cash-transfer.html', {
+                    'form': form,
+                    'msg': 'Insufficient Funds.'
+                })
+            else:
+                card.account_number.balance -= amount
+                rec_accNum.balance +=amount
+                card.save()
+                rec_accNum.save()
+                transaction = transaction_models.transaction(status='complete',response_code='200',transaction_type='transfer')
+                transaction.card_number=card
+                transaction.save()
+                return render(request, 'account/transfer.html', {
+                    'msg': 'Funds Transfered Successful',
+                    'form': form
+                })
+        else: 
+            form = card_forms.TransferForm()
+            return render(request, 'account/transfer.html', {
+            'form': form,
+            'msg': 'Form is not valid.'
+        })
+    else:
+        form = card_forms.TransferForm()
+        return render(request, 'account/transfer.html', {
+            'form': form
+        })
+            
 @user_authenticated
 def transaction_history(request):
     renderData = {
