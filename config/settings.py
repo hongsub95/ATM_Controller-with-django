@@ -38,7 +38,7 @@ DJANGO_APPS = [
     'django.contrib.staticfiles',
 ]
 PROJECT_APPS = ["Accounts.apps.AccountsConfig","transactions.apps.TransactionsConfig"]
-THIRD_APPS = []
+THIRD_APPS = ['rest_framework',]
 
 INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS + THIRD_APPS
 
