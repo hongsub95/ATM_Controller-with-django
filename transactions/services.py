@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from . import models as transaction_models
 from Accounts import models as accounts_models
+from random import randint
 
-#It knows transaction-history
 
 def renderpage(renderdata):
     if not renderdata['request']:
@@ -32,4 +32,23 @@ def getTransactionCard(CardNumber):
 def getMessageData(data,msg):
     data['message'] = msg
     return 
-        
+
+def CreateCardNum():
+    a = randint(11111111,99999999)
+    b = randint(11111111,99999999)
+    cardNum = str(a)+str(b)
+    try:
+        card = accounts_models.CardInfo.objects.get(card_number=cardNum)
+    except:
+        return cardNum
+    CreateCardNum() # 카드넘버가 겹치지 않을때까지  
+
+def CreateAccountNum():
+    a = randint(11111,99999)
+    b = randint(11111,99999)
+    accountNum = str(a)+str(b)
+    try:
+        account =accounts_models.AccountInfo.objects.get(account_number=accountNum)
+    except:
+        return accountNum
+    CreateAccountNum()

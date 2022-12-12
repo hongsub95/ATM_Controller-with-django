@@ -168,3 +168,4 @@ def transaction_history(request):
         return services.renderpage(renderData)
     renderData['context']['history'] = transactions
     return services.renderpage(renderData)
+

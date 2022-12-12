@@ -37,7 +37,7 @@ DJANGO_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
-PROJECT_APPS = ["Accounts.apps.AccountsConfig","transactions.apps.TransactionsConfig"]
+PROJECT_APPS = ["Accounts.apps.AccountsConfig","transactions.apps.TransactionsConfig","administrators.apps.AdministratorsConfig"]
 THIRD_APPS = ['rest_framework',]
 
 INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS + THIRD_APPS
@@ -102,6 +102,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 10
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
