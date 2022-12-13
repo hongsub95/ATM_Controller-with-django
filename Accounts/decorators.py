@@ -9,7 +9,7 @@ def user_authenticated(func):
                 return func(request,*args,**kwargs)
             return redirect(reverse('account:InsertCard'))
         else:
-            if request.path == '/hong-bank/InsertCard':
+            if request.path == '/hong-bank/card-insert/':
                 return redirect('/hong-bank/')
             return func(request,*args,**kwargs)
     wrap.__doc__ = func.__doc__

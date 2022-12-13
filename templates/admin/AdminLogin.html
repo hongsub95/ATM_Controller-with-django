@@ -1,9 +1,9 @@
 {% include "admin/Admin-base.html" %}
 {% block contents %}
-<form form action ="{% url 'administrator:create-card'%}" method = 'POST'>
+<form action ="{% url 'administrator:admin-login'%}" method = 'POST'>
     {% csrf_token %}
     {{form}}
-    <button  type = 'submit'> Submit </button> 
+    <button  type = 'submit'> Login </button> 
 </form>
 {% if msg %}
     {{msg}}

@@ -1,7 +1,11 @@
 from django.urls import path
 from . import views
 
+app_name='administrator'
+
 urlpatterns = [
     path('',views.home,name="admin-home"),
-    path('add_card/',views.CreateCardView,name="admin-add-card")
+    path('login_admin/',views.AdminLogin,name="admin-login"),
+    path('logout_admin/',views.AdminLogout,name="admin-logout"),
+    path('create_card/',views.CreateCardView,name="create-card")
 ]

@@ -11,9 +11,10 @@ class AdminLoginForm(forms.Form):
         widget = forms.PasswordInput()
     )
 class CreateCardForm(forms.Form):
-    is_AccNum = forms.BooleanField(
-        label="If you have Account Number,ignore",
-        default=False
+    # 계좌번호가 존재하면 계좌번호 입력, 없으면 초기값 0으로 제출
+    is_AccNum = forms.CharField(
+        label="Account Number",
+        initial="0"
     )
     name = forms.CharField(
         label="name",

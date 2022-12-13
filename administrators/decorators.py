@@ -1,14 +1,14 @@
 from django.shortcuts import redirect
-from django.http import HttpResponseRedirect
+from django.urls import reverse
 
 def admin_authenticated(function): 
     def wrap(request, *args, **kwargs): 
-        if 'admin-token' not in request.session: 
-            if request.path == '/administrator/admin_login': 
+        if 'admin_token' not in request.session: 
+            if request.path == 'administrator/login_admin/': 
                 return function(request, *args, **kwargs)
-            return redirect('/administrator/admin-login')
+            return redirect(reverse("administrator:admin-login"))
         else: 
-            if request.path == '/administrator/admin_login': 
+            if request.path == '/administrator/login_admin/': 
                 return redirect('/administrator/')
             return function(request,*args,**kwargs)
     wrap.__doc__ = function.__doc__
