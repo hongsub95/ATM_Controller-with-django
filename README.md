@@ -12,7 +12,7 @@ Account_schema : account_number(계좌번호), balance(현재잔액)\
 Card_schema : Account_id, name(사용자이름), card_number(카드번호), Pin(핀넘버), phone_number(사용자 전화번호)\
 transaction_schema : Transaction_type(트랜잭션 종류),transaction_status(트랜잭션 성공여부),card_id,date(트랜잭션한 날짜)ㅁ
 administrator_schema : username,password
-## Have to do 
+## 구현 
 ### 1.Insert Card [o] 
 이 부분은 2번으로 대체 (atm기계처럼 카드를 직접 넣을 수 없으니, 단순 카드번호와 pin번호 확인으로 대체)
 ### 2. Check Card number and PIN number (valid or not) [o]
