@@ -15,11 +15,11 @@ administrator_schema : username,password
 ## 구현 
 ### 1.Insert Card [o] 
 이 부분은 2번으로 대체 (atm기계처럼 카드를 직접 넣을 수 없으니, 단순 카드번호와 pin번호 확인으로 대체)
-### 2. Check Card number and PIN number (valid or not) [o]
+### 2. Check Card number and PIN number (valid or not) 
 card number와 pin number를 확인 후 session에 card number를 저장 (카드를 빼면 session에서 삭제)
-### 3. Select transaction(Balance/Deposit/Withdraw/transfer) [o] 
+### 3. Select transaction(Balance/Deposit/Withdraw/transfer) 
 트랜잭션이 잘 이루어져 있는지 확인 (현재 transaction status는 complete밖에 구현 못했음)
-### 4. Balance Inquiry, Deposit view, Withdraw view, Transfer view [o]
+### 4. Balance Inquiry, Deposit view, Withdraw view, Transfer view
 데코레이터 user_authenticate를 만들어 card_number가 저장되어 있는 session에 접근하여 card_number에 해당하는 card 쿼리셋을 가져와서\
 balance inquiry(잔액조회), deposit(입금), withdraw(인출), transfer(송금) 구현
 ### 5. Create Card,Account (only Administrator)
