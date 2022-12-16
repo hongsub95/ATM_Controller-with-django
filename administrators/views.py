@@ -58,11 +58,53 @@ def CreateCardView(request):
             form = admin_form.CreateCardForm()
             return render(request, 'admin/CreateCard.html', {'form': form, 'msg': 'Card created succesfully!'})
         else: 
+            form = admin_form.CreateCardForm()
             return render(request, 'admin/CreateCard.html', {'form': form, 'msg': 'Form not valid'})
     else:
         form = admin_form.CreateCardForm()
         return render(request, 'admin/CreateCard.html', {'form': form})
-            
+
+@admin_authenticated
+def UpdateCardView(request): #카드 분실 시 카드 재발급
+    if request.method == "POST":
+        form = admin_form.UpdateCardForm(request.POST)
+        if form.is_valid():
+            card_number = form.cleaned_data["card_number"]
+            try:
+                account_models.CardInfo.objects.get(card_number=card_number)
+            except:
+                return render(request,"admin/updatecard.html",{"msg":"Card Does not exist"})
+            account_models.CardInfo.objects.filter(card_number=card_number).update(card_number=services.CreateCardNum())
+            return render(request, 'admin/updatecard.html', {'form': form, 'msg': 'Card updated succesfully!'})
+        else:
+            form = admin_form.UpdateCardForm()
+            return render(request, 'admin/updatecard.html', {'form': form, 'msg': 'Form not valid'})
+    else:
+        form = admin_form.UpdateCardForm()
+        return render(request, 'admin/updatecard.html', {'form': form})       
+
+@admin_authenticated
+def ResetPinView(request):
+    if request.method == "POST":
+        form = admin_form.ResetPinNumberForm(request.POST)
+        if form.is_valid():
+            card_number = form.cleaned_data["card_number"]
+            try:
+                card = account_models.CardInfo.objects.get(card_number=card_number)
+            except:
+                return render(request,"admin/ResetPin.html",{"msg":"Card Does not exist"})
+            if form.cleaned_data["old_pin"] != card.pin:
+                return render(request,"admin/ResetPin.html",{"msg":"Incorrect Pin number"})
+            card.pin = form.cleaned_data["new_pin"]
+            card.save()
+            return render(request, 'admin/ResetPin.html', {'form': form, 'msg': 'PIN has been reset to ' + card.pin})
+        else:
+            form = admin_form.ResetPinNumberForm()
+            return render(request, 'admin/ResetPin.html', {'form': form, 'msg': 'Form not valid'})
+    else:
+        form = admin_form.ResetPinNumberForm()
+        return render(request, 'admin/ResetPin.html', {'form': form})    
+        
             
             
             

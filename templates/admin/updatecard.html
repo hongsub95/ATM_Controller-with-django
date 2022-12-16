@@ -1,0 +1,11 @@
+{% include "admin/Admin-base.html" %}
+{% block contents %}
+<form form action ="{% url 'administrator:update-card'%}" method = 'POST'>
+    {% csrf_token %}
+    {{form}}
+    <button  type = 'submit'> Submit </button> 
+</form>
+{% if msg %}
+    {{msg}}
+{% endif %}
+{% endblock contents %}

@@ -4,6 +4,6 @@ from . import views
 app_name="api_account"
 
 urlpatterns = [
-    path('account/',views.AccountListAPIView.as_view()),
-    path('card/',views.CardListAPIView.as_view()),
+    path('account/',views.AccountListCreateAPIView.as_view()),
+    path('card/',views.CardListCreateAPIView.as_view()),
 ]

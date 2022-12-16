@@ -1,6 +1,8 @@
 {% if request.session.admin_token %}
     <a href = "{% url 'administrator:admin-logout' %}"> Log out</a>
     <a href = "{% url 'administrator:create-card' %}">Create Card</a>
+    <a href = "{% url 'administrator:update-card' %}">Update Card</a>
+    <a href = "{% url 'administrator:change-pin' %}">Change Pin Number</a>
 {% else %}
     <a href="{% url 'administrator:admin-login' %}">Login</a>
 {% endif %}

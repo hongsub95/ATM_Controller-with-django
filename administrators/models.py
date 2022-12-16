@@ -1,7 +1,8 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
-class AdminUser(models.Model):
+class AdminUser(AbstractUser):
     username = models.CharField(
         primary_key = True, 
         max_length = 20, 

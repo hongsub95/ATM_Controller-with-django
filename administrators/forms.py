@@ -26,6 +26,22 @@ class CreateCardForm(forms.Form):
         widget = forms.PasswordInput()
     )
     phone_number = forms.CharField(
-        max_length=12,
+        max_length=11,
         label = "phone_number"
+    )
+class UpdateCardForm(forms.Form):
+    card_number = forms.CharField(max_length=16,label="Card Number")
+
+class ResetPinNumberForm(forms.Form):
+    card_number = forms.CharField(
+        max_length=16,
+        label="Card Number"
+    )
+    old_pin = forms.CharField(
+        max_length=4,
+        label = "Old Pin Number"
+    )
+    new_pin = forms.CharField(
+        max_length = 4,
+        label="New Pin number"
     )
