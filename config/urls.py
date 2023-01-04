@@ -21,5 +21,5 @@ urlpatterns = [
     path('hong-bank/', include('Accounts.urls',namespace='account')),
     path('hong-bank/transaction/',include("transactions.api.urls",namespace="api_transaction")),
     path('administrator/', include('administrators.urls',namespace='administrator')),
-    path('hong-bank/api/', include('Accounts.api.urls',namespace='api_account')),
+    path('administrator/api/', include('administrators.api.urls',namespace='administrator')),
 ]

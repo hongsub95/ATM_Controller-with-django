@@ -22,11 +22,10 @@ card number와 pin number를 확인 후 session에 card number를 저장 (카드
 ### 4. Balance Inquiry, Deposit view, Withdraw view, Transfer view
 데코레이터 user_authenticate를 만들어 card_number가 저장되어 있는 session에 접근하여 card_number에 해당하는 card 쿼리셋을 가져와서\
 balance inquiry(잔액조회), deposit(입금), withdraw(인출), transfer(송금) 구현
-### 5. Create,Update Card,Account Reset PinNumber(only Administrator)
+### 5. Create,Update Card,Account Reset Pin Number (only Administrator)
 관리자를 통해 카드,계좌 만들기 , 카드 번호 재발급, 핀번호 바꾸기
 
-## 구현(DRF)
-### 1.Account, Card List
+
 
 
 
